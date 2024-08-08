@@ -26,7 +26,7 @@ const App = () => {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
               {pizzas.map((itemObj, index) => {
-                return <PizzaBlock key={index} {...itemObj} />;
+                return <PizzaBlock key={itemObj.id} {...itemObj} />;
               })}
             </div>
           </div>
