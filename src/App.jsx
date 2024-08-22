@@ -16,6 +16,7 @@ const App = () => {
   //states
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://66c4e535b026f3cc6cf0fed2.mockapi.io/items")
@@ -27,6 +28,7 @@ const App = () => {
       })
       .then((data) => {
         setData(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         setError(error.message);
@@ -45,9 +47,13 @@ const App = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-              {data.map((itemObj, index) => {
-                return <PizzaBlock key={itemObj.id} {...itemObj} />;
-              })}
+              {isLoading
+                ? [...new Array(6)].map((itemObj, index) => (
+                    <Skeleton key={index} />
+                  ))
+                : data.map((itemObj, index) => (
+                    <PizzaBlock key={itemObj.id} {...itemObj} />
+                  ))}
             </div>
           </div>
         </div>
