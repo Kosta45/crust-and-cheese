@@ -1,9 +1,14 @@
 @import '../variables';
 
+
 .categories {
+  max-width: 500px;
+  overflow-x: scroll;
+  scrollbar-width: grey;
+  scrollbar-width: 2px;
 
   ul {
-    display: flex;
+    width: 170%;
 
     li {
       display: inline-block;
