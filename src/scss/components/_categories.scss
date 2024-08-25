@@ -2,13 +2,19 @@
 
 
 .categories {
-  max-width: 500px;
+  width: 100%;
   overflow-x: scroll;
   scrollbar-width: grey;
   scrollbar-width: 2px;
+  white-space: nowrap;
+
+  @media (max-width: 1060px) {
+    margin-bottom: 20px;
+  }
+
 
   ul {
-    width: 170%;
+    width: 100%;
 
     li {
       display: inline-block;
@@ -27,6 +33,10 @@
 
       &:active {
         background-color: darken(#f9f9f9, 5%);
+      }
+
+      @media (max-width: 760px) {
+        padding: 8px 20px;
       }
 
       &.active {
