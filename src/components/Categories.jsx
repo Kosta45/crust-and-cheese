@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
 
-const Categories = () => {
+const Categories = ({ value, onClickCategory }) => {
   // states
-  const [activeIndex, setActiveIndex] = useState(0);
 
   //refs
   const categoriesRef = useRef();
@@ -19,14 +18,14 @@ const Categories = () => {
   return (
     <div className="categories">
       <ul ref={categoriesRef}>
-        {categories.map((item, index) => {
+        {categories.map((categoryName, index) => {
           return (
             <li
-              onClick={() => setActiveIndex(index)}
-              className={activeIndex === index ? "active" : ""}
+              onClick={() => onClickCategory(index)}
+              className={value === index ? "active" : ""}
               key={index}
             >
-              {item}
+              {categoryName}
             </li>
           );
         })}

@@ -10,9 +10,14 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState(0);
 
   useEffect(() => {
-    fetch("https://66c4e535b026f3cc6cf0fed2.mockapi.io/items")
+    setIsLoading(true);
+    fetch(
+      `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?category=${categoryId}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error: " + response.status);
@@ -27,13 +32,16 @@ const Home = () => {
         setError(error.message);
       });
     window.scrollTo(0, 0);
-  }, []);
+  }, [categoryId]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories
+          value={categoryId}
+          onClickCategory={(index) => setCategoryId(index)}
+        />
+        <Sort value />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
