@@ -41,7 +41,7 @@ const Home = () => {
           value={categoryId}
           onClickCategory={(index) => setCategoryId(index)}
         />
-        <Sort value />
+        <Sort value={sortType} onClickSort={(index) => setSortType(index)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
