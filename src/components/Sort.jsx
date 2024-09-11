@@ -4,7 +4,11 @@ const Sort = ({ value, onClickSort }) => {
   //states
   const [visibleSort, setVisibleSort] = useState(false);
 
-  const list = ["популярности", "цене", "алфавиту"];
+  const list = [
+    { name: "популярности", sort: "rating" },
+    { name: "цене", sort: "price" },
+    { name: "алфавиту", sort: "title" },
+  ];
 
   const changeVisibleSort = () => {
     if (visibleSort) {
@@ -35,7 +39,7 @@ const Sort = ({ value, onClickSort }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>по {list[value]}</span>
+        <span>по {value.name}</span>
       </div>
       {visibleSort && (
         <div className="sort__popup">
@@ -43,11 +47,11 @@ const Sort = ({ value, onClickSort }) => {
             {list.map((item, index) => {
               return (
                 <li
-                  onClick={() => onClickSort(index)}
-                  className={value === index ? "active" : ""}
+                  onClick={() => onClickSort(item)}
+                  className={value.sort === item.sort ? "active" : ""}
                   key={item}
                 >
-                  {item}
+                  {item.name}
                 </li>
               );
             })}
