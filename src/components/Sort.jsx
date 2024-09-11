@@ -5,9 +5,12 @@ const Sort = ({ value, onClickSort }) => {
   const [visibleSort, setVisibleSort] = useState(false);
 
   const list = [
-    { name: "популярности", sort: "rating" },
-    { name: "цене", sort: "price" },
-    { name: "алфавиту", sort: "title" },
+    { name: "популярности (DESC)", sort: "rating" },
+    { name: "популярности (ASC)", sort: "-rating" },
+    { name: "цене (DESC)", sort: "price" },
+    { name: "цене (ASC)", sort: "-price" },
+    { name: "алфавиту (DESC)", sort: "title" },
+    { name: "алфавиту (ASC)", sort: "-title" },
   ];
 
   const changeVisibleSort = () => {

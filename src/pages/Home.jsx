@@ -18,8 +18,13 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
+    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const sortBy = sortType.sort.replace("-", "");
+    const order = sortType.sort.includes("-") ? "asc" : "desc";
+
     fetch(
-      `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?category=${categoryId}`
+      `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
     )
       .then((response) => {
         if (!response.ok) {
