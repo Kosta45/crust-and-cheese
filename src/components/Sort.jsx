@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Sort = ({ value, onClickSort }) => {
+const Sort = ({ value, onClickSort, visible }) => {
   //states
   const [visibleSort, setVisibleSort] = useState(false);
 
@@ -13,17 +13,19 @@ const Sort = ({ value, onClickSort }) => {
     { name: "алфавиту (ASC)", sort: "-title" },
   ];
 
+  const selectActiveSort = (index) => {
+    if (index) {
+      setVisibleSort(false);
+    }
+  };
+
   const changeVisibleSort = () => {
     if (visibleSort) {
       setVisibleSort(false);
     } else {
       setVisibleSort(true);
     }
-  };
-
-  const selectActiveSort = (index) => {
-    setSortActive(index);
-    setVisibleSort(false);
+    // selectActiveSort(value);
   };
 
   return (
@@ -50,9 +52,12 @@ const Sort = ({ value, onClickSort }) => {
             {list.map((item, index) => {
               return (
                 <li
-                  onClick={() => onClickSort(item)}
+                  onClick={() => {
+                    onClickSort(item);
+                    setVisibleSort(false);
+                  }}
                   className={value.sort === item.sort ? "active" : ""}
-                  key={item}
+                  key={item.name}
                 >
                   {item.name}
                 </li>
