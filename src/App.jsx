@@ -4,11 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Basket from "./pages/Basket";
 
 import "./App.css";
-
 import "./scss/app.scss";
-import Basket from "./pages/Basket";
 
 export const SearchContext = createContext();
 
