@@ -1,4 +1,6 @@
+//libraries react
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setCategoryId } from "../redux/slices/filterSlice";
@@ -34,22 +36,16 @@ const Home = () => {
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `search=${searchValue}` : "";
 
-    fetch(
-      `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}&${search}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error: " + response.status);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
+    axios
+      .get(
+        `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}&${search}`
+      )
+      .then((res) => {
+        console.log(res);
+        setData(res.data);
         setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
       });
+
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
