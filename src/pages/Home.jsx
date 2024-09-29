@@ -12,21 +12,15 @@ import { SearchContext } from "../App";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
-
-  console.log(categoryId);
+  const { categoryId, sort } = useSelector((state) => state.filter);
 
   const { searchValue } = useContext(SearchContext);
+
   //states
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  // const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState({
-    name: "популярности",
-    sort: "title",
-  });
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -36,8 +30,8 @@ const Home = () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const sortBy = sortType.sort.replace("-", "");
-    const order = sortType.sort.includes("-") ? "asc" : "desc";
+    const sortBy = sort.sortProperty.replace("-", "");
+    const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `search=${searchValue}` : "";
 
     fetch(
@@ -57,7 +51,7 @@ const Home = () => {
         setError(error.message);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const pizzas = data.map((itemObj, index) => (
     <PizzaBlock key={itemObj.id} {...itemObj} />
@@ -71,7 +65,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={onChangeCategory} />
-        <Sort value={sortType} onClickSort={(index) => setSortType(index)} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skelletons : pizzas}</div>
