@@ -1,12 +1,27 @@
 import React, { useState, useRef, useContext } from "react";
+import debounce from "lodash.debounce";
 import { SearchContext } from "../../App";
 
 import styles from "./Search.module.scss";
+
+const testDebounce = debounce(() => {
+  console.log("Hello");
+}, 500);
 
 const Search = () => {
   const { searchValue, setSearchValue } = useContext(SearchContext);
 
   const inputRef = useRef();
+
+  const onClickClear = () => {
+    setSearchValue("");
+    inputRef.current.focus();
+  };
+
+  const onChangeInput = (event) => {
+    // setSearchValue(event.target.value);
+    testDebounce();
+  };
 
   return (
     <div className={styles.root}>
@@ -33,14 +48,14 @@ const Search = () => {
       <input
         ref={inputRef}
         value={searchValue}
-        onChange={() => setSearchValue(inputRef.current.value)}
+        onChange={onChangeInput}
         className={styles.input}
         placeholder="Поиск пицыы"
       />
 
       {searchValue && (
         <svg
-          onClick={() => setSearchValue("")}
+          onClick={() => onClickClear()}
           className={styles.clearIcon}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
