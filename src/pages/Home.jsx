@@ -1,6 +1,7 @@
 //libraries react
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
