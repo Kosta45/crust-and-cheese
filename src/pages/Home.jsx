@@ -1,20 +1,29 @@
 //libraries react
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/filterSlice";
 
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, { list } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination/Pagination";
 import { SearchContext } from "../App";
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
@@ -34,7 +43,8 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  // Запрос для получения пицц
+  const fetchPizzas = () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -52,12 +62,57 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
+  };
+
+  // Если был первый рендер и изменены параметры, то меняем параметры в адресной строке.
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currentPage,
+      });
+
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sort.sortProperty, currentPage]);
+
+  // При первом рендере, если он был идет проверка URL-параметров и сохраняем в redax
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      console.log(params);
+
+      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        })
+      );
+      isSearch.currentPage = true;
+    }
+  }, []);
+
+  //..........
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+
+    isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
+  // Блок с пиццами.
   const pizzas = data.map((itemObj, index) => (
     <PizzaBlock key={itemObj.id} {...itemObj} />
   ));
 
+  // Блок с заглушками, скелетоном для пицц.
   const skelletons = [...new Array(6)].map((itemObj, index) => (
     <Skeleton key={index} />
   ));
