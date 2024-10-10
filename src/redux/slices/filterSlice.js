@@ -30,8 +30,7 @@ const filterSlice = createSlice({
     }
 });
 
-console.log(filterSlice.reducer)
-
+console.log(initialState)
 export const { setCategoryId, setSort, setCurrentPage, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;
