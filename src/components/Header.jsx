@@ -9,6 +9,10 @@ const Header = () => {
     return state.basket;
   });
 
+  const totalCount = items.reduce((sum, item) => {
+    return sum + item.count;
+  }, 0);
+
   return (
     <div className="header">
       <div className="container">
@@ -55,7 +59,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>{items.length}</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>
