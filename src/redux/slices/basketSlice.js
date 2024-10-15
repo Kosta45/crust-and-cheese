@@ -37,11 +37,17 @@ const basketSlice = createSlice({
         },
         clearItems(state) {
             state.items = []
+        },
+        minusItem(state, action) {
+            console.log(action.payload)
+        },
+        plusItem(state, action) {
+            console.log(action.payload)
         }
     }
 });
 
 
-export const { addItem, removeItem, clearItems } = basketSlice.actions;
+export const { addItem, removeItem, clearItems, minusItem, plusItem } = basketSlice.actions;
 
 export default basketSlice.reducer;
