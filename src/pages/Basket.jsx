@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import PizzaBlockInBasket from "../components/PizzaBlock/PizzaBlockInBasket";
-import { minusItem, plusItem } from "../redux/slices/basketSlice";
+import { clearItems } from "../redux/slices/basketSlice";
 
 const Basket = () => {
   const dispatch = useDispatch();
@@ -12,11 +12,17 @@ const Basket = () => {
     return state.basket.items;
   });
 
-  const onMinusItem = (count) => {
-    dispatch(minusItem(count));
-  };
-  const onPlusItem = (count) => {
-    dispatch(plusItem(count));
+  const { totalPrice, items } = useSelector((state) => {
+    return state.basket;
+  });
+
+  const totalCount = items.reduce((sum, item) => {
+    return sum + item.count;
+  }, 0);
+
+  const onClickClear = () => {
+    if (window.confirm("Do you want to clear the basket?"))
+      dispatch(clearItems());
   };
 
   return (
@@ -55,7 +61,7 @@ const Basket = () => {
             </svg>
             Корзина
           </h2>
-          <div className="cart__clear">
+          <div className="cart__clear" onClick={onClickClear}>
             <svg
               width="20"
               height="20"
@@ -98,25 +104,18 @@ const Basket = () => {
         <div className="content__items">
           {pizzas &&
             pizzas.map((pizza) => {
-              return (
-                <PizzaBlockInBasket
-                  {...pizza}
-                  key={pizza.id}
-                  onMinusItem={onMinusItem}
-                  onPlusItem={onPlusItem}
-                />
-              );
+              return <PizzaBlockInBasket {...pizza} key={pizza.id} />;
             })}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего пицц: <b>3 шт.</b>{" "}
+              Всего пицц: <b>{totalCount} шт.</b>{" "}
             </span>
             <span>
               {" "}
-              Сумма заказа: <b>900 ₽</b>{" "}
+              Сумма заказа: <b>{totalPrice} ₽</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
