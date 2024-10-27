@@ -1,7 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addItem, minusItem, removeItem } from "../../redux/slices/basketSlice";
+import {
+  addItem,
+  minusItem,
+  removeItem,
+  clearItems,
+} from "../../redux/slices/basketSlice";
 
 const PizzaBlockInBasket = ({
   id,
@@ -27,8 +32,9 @@ const PizzaBlockInBasket = ({
   };
 
   const onClickRemove = () => {
-    if (window.confirm("Are you sure you want to remove?"))
+    if (window.confirm("Are you sure you want to remove?")) {
       dispatch(removeItem(id));
+    }
   };
 
   return (
@@ -39,7 +45,7 @@ const PizzaBlockInBasket = ({
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {type} {size}
+          {type} {size} см.
         </p>
       </div>
       <div className="cart__item-count">

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
+import { clearItems } from "../redux/slices/basketSlice";
 
 import PizzaBlockInBasket from "../components/PizzaBlock/PizzaBlockInBasket";
-import { clearItems } from "../redux/slices/basketSlice";
+import BasketEmpty from "../components/BasketEmpty";
 
 const Basket = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,10 @@ const Basket = () => {
     if (window.confirm("Do you want to clear the basket?"))
       dispatch(clearItems());
   };
+
+  if (!totalPrice) {
+    return <BasketEmpty />;
+  }
 
   return (
     <div className="container container--cart">

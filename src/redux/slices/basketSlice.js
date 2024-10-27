@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
     totalPrice: 0,
@@ -44,9 +45,14 @@ const basketSlice = createSlice({
             }
         },
         removeItem(state, action) {
-            state.items.filter((obj) => {
-                obj.id !== action.payload
+            const findItem = state.items.find((obj) => {
+                return obj.id === action.payload
             })
+            state.totalPrice = state.totalPrice - findItem.price * findItem.count
+            state.items = state.items.filter((obj) => {
+                return obj.id !== action.payload
+            })
+
         },
         clearItems(state) {
             state.items = []
