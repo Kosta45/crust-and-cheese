@@ -21,6 +21,9 @@ const PizzaBlockInBasket = ({
 
   const onMinusItem = () => {
     dispatch(minusItem(id));
+    if (count == 1) {
+      dispatch(removeItem(id));
+    }
   };
 
   const onPlusItem = () => {
