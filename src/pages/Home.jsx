@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   // Запрос для получения пицц
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -52,14 +52,17 @@ const Home = () => {
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `search=${searchValue}` : "";
 
-    axios
-      .get(
+    try {
+      const res = await axios.get(
         `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}&${search}`
-      )
-      .then((res) => {
-        setData(res.data);
-        setIsLoading(false);
-      });
+      );
+      setData(res.data);
+      setIsLoading(false);
+    } catch (err) {
+      console.log("Error", err);
+    } finally {
+      setIsLoading(false);
+    }
 
     window.scrollTo(0, 0);
   };
@@ -82,7 +85,6 @@ const Home = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      console.log(params);
 
       const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
 
