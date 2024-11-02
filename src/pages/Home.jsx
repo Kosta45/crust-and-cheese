@@ -1,6 +1,5 @@
 //libraries react
 import React, { useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
 import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import {
   setCurrentPage,
   setFilters,
 } from "../redux/slices/filterSlice";
+import { fetchPizzasData } from "../redux/slices/pizzasSlice";
 
 import Categories from "../components/Categories";
 import Sort, { list } from "../components/Sort";
@@ -27,11 +27,11 @@ const Home = () => {
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
+  const dataPizzas = useSelector((state) => state.pizza.items);
 
   const { searchValue } = useContext(SearchContext);
 
   //states
-  const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   // Запрос для получения пицц
-  const fetchPizzas = async () => {
+  const getPizzas = async () => {
     setIsLoading(true);
 
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -53,11 +53,15 @@ const Home = () => {
     const search = searchValue ? `search=${searchValue}` : "";
 
     try {
-      const res = await axios.get(
-        `https://66c4e535b026f3cc6cf0fed2.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}&${search}`
+      dispatch(
+        fetchPizzasData({
+          category,
+          sortBy,
+          order,
+          search,
+          currentPage,
+        })
       );
-      setData(res.data);
-      setIsLoading(false);
     } catch (err) {
       console.log("Error", err);
     } finally {
@@ -101,16 +105,11 @@ const Home = () => {
   // Если был первый рендер то получаем пиццы
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    if (!isSearch.current) {
-      fetchPizzas();
-    }
-
-    isSearch.current = false;
+    getPizzas();
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   // Блок с пиццами.
-  const pizzas = data.map((itemObj, index) => (
+  const pizzas = dataPizzas.map((itemObj, index) => (
     <PizzaBlock key={itemObj.id} {...itemObj} />
   ));
 
