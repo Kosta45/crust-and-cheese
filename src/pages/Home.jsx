@@ -27,13 +27,13 @@ const Home = () => {
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
-  const dataPizzas = useSelector((state) => state.pizza.items);
+  const { items: dataPizzas, status: statusLoading } = useSelector(
+    (state) => state.pizza
+  );
 
   const { searchValue } = useContext(SearchContext);
 
   //states
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -45,29 +45,19 @@ const Home = () => {
 
   // Запрос для получения пицц
   const getPizzas = async () => {
-    setIsLoading(true);
-
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortBy = sort.sortProperty.replace("-", "");
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `search=${searchValue}` : "";
-
-    try {
-      dispatch(
-        fetchPizzasData({
-          category,
-          sortBy,
-          order,
-          search,
-          currentPage,
-        })
-      );
-    } catch (err) {
-      console.log("Error", err);
-    } finally {
-      setIsLoading(false);
-    }
-
+    dispatch(
+      fetchPizzasData({
+        category,
+        sortBy,
+        order,
+        search,
+        currentPage,
+      })
+    );
     window.scrollTo(0, 0);
   };
 
@@ -125,7 +115,14 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skelletons : pizzas}</div>
+
+      {statusLoading === "error" ? (
+        <h2>Error</h2>
+      ) : (
+        <div className="content__items">
+          {statusLoading === "loading" ? skelletons : pizzas}
+        </div>
+      )}
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );

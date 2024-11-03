@@ -13,7 +13,8 @@ export const fetchPizzasData = createAsyncThunk(
 )
 
 const initialState = {
-    items: []
+    items: [],
+    status: 'loading'
 }
 
 const pizzaSlice = createSlice({
@@ -30,7 +31,7 @@ const pizzaSlice = createSlice({
             // Add user to the state array
             state.items = action.payload
             state.status = 'succeeded'
-        }).addCase(fetchPizzasData.pending, (state, action) => {
+        }).addCase(fetchPizzasData.pending, (state) => {
             state.status = "loading"
             state.items = []
         }).addCase(fetchPizzasData.rejected, (state) => {
