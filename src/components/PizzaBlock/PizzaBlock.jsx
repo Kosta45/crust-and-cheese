@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addItem } from "../../redux/slices/basketSlice";
+import { addItem, selectBasketItemById } from "../../redux/slices/basketSlice";
 
 const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  const isAddedCount = useSelector((state) =>
-    state.basket.items.find((obj) => {
-      return obj.id === id;
-    })
-  );
+  const isAddedCount = useSelector(selectBasketItemById(id));
 
   const isCount = isAddedCount ? isAddedCount.count : 0;
 
