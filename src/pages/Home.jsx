@@ -16,7 +16,6 @@ import Sort, { list } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination/Pagination";
-import { SearchContext } from "../App";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,16 +23,12 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector(
+  const { categoryId, sort, currentPage, searchValue } = useSelector(
     (state) => state.filter
   );
   const { items: dataPizzas, status: statusLoading } = useSelector(
     (state) => state.pizza
   );
-
-  const { searchValue } = useContext(SearchContext);
-
-  //states
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
