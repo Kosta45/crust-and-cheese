@@ -1,8 +1,8 @@
 //libraries react
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   setCategoryId,
@@ -70,7 +70,7 @@ const Home = () => {
     isMounted.current = true;
   }, [categoryId, sort.sortProperty, currentPage]);
 
-  // При первом рендере, если он был идет проверка URL-параметров и сохраняем в redax
+  // При первом рендере, если он был идет проверка URL-параметров и сохраняем в redux
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -94,8 +94,10 @@ const Home = () => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   // Блок с пиццами.
-  const pizzas = dataPizzas.map((itemObj, index) => (
-    <PizzaBlock key={itemObj.id} {...itemObj} />
+  const pizzas = dataPizzas.map((itemObj) => (
+    <Link key={itemObj.id} to={`/pizza/${itemObj.id}`}>
+      <PizzaBlock key={itemObj.id} {...itemObj} />
+    </Link>
   ));
 
   // Блок с заглушками, скелетоном для пицц.
