@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Pizza = () => {
   const [pizza, setPizza] = useState();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPizza = async () => {
@@ -12,10 +13,10 @@ const Pizza = () => {
         const { data } = await axios.get(
           "https://66c4e535b026f3cc6cf0fed2.mockapi.io/items/" + id
         );
-        console.log(data);
         setPizza(data);
       } catch (error) {
         console.log(error + "Ошбика при получения конкретной пиццы");
+        navigate("/");
       }
     };
     getPizza();
