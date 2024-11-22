@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -10,7 +10,7 @@ import Pizza from "./pages/Pizza";
 import "./App.css";
 import "./scss/app.scss";
 
-const App = () => {
+const App: FC = () => {
   return (
     <div className="wrapper">
       <Header />
