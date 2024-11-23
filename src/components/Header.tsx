@@ -7,7 +7,7 @@ const Header = () => {
   const { items, totalPrice } = useSelector((state) => state.basket);
   const location = useLocation();
 
-  const totalCount = items.reduce((sum, item) => {
+  const totalCount = items.reduce((sum: number, item) => {
     return sum + item.count;
   }, 0);
 

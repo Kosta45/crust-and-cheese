@@ -1,10 +1,13 @@
-import React, { useState, useRef } from "react";
+import { useRef, FC } from "react";
 
-const Categories = ({ value, onClickCategory }) => {
-  // states
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any;
+};
 
+const Categories: FC<CategoriesProps> = ({ value, onClickCategory }) => {
   //refs
-  const categoriesRef = useRef();
+  const categoriesRef = useRef<HTMLUListElement>(null);
 
   const categories = [
     "Все",
