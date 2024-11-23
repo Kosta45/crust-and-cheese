@@ -1,9 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addItem, selectBasketItemById } from "../../redux/slices/basketSlice";
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+const PizzaBlock: FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const dispatch = useDispatch();
   const isAddedCount = useSelector(selectBasketItemById(id));
 
@@ -13,7 +29,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
-  const typeNames = ["Тонкое", "Традиционное"];
+  const typeNames: string[] = ["Тонкое", "Традиционное"];
 
   const onClickAdd = () => {
     const item = {
@@ -34,11 +50,11 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
-            {types.map((typeId, index) => {
+            {types.map((typeId: number) => {
               return (
                 <li
-                  onClick={() => setActiveType(index)}
-                  className={activeType === index ? "active" : ""}
+                  onClick={() => setActiveType(typeId)}
+                  className={activeType === typeId ? "active" : ""}
                   key={typeId}
                 >
                   {typeNames[typeId]}
