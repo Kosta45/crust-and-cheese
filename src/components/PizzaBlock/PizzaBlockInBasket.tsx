@@ -1,14 +1,24 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
 
 import {
   addItem,
   minusItem,
   removeItem,
-  clearItems,
+  // clearItems,
 } from "../../redux/slices/basketSlice";
 
-const PizzaBlockInBasket = ({
+type PizzaInBasketProps = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  price: number;
+  type: string;
+  size: number;
+  count: number;
+};
+
+const PizzaInBasket: FC<PizzaInBasketProps> = ({
   id,
   title,
   imageUrl,
@@ -126,4 +136,4 @@ const PizzaBlockInBasket = ({
   );
 };
 
-export default PizzaBlockInBasket;
+export default PizzaInBasket;
