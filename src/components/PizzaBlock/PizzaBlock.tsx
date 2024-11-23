@@ -26,8 +26,8 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
   const isCount = isAddedCount ? isAddedCount.count : 0;
 
   //states
-  const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSize] = useState(0);
+  const [activeType, setActiveType] = useState<number>(0);
+  const [activeSize, setActiveSize] = useState<number>(0);
 
   const typeNames: string[] = ["Тонкое", "Традиционное"];
 
