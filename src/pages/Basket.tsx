@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { clearItems } from "../redux/slices/basketSlice";
 import PizzaBlockInBasket from "../components/PizzaBlock/PizzaBlockInBasket";
 import BasketEmpty from "../components/BasketEmpty";
 
-const Basket = () => {
+const Basket: FC = () => {
   const dispatch = useDispatch();
 
   const pizzas = useSelector((state) => {
@@ -18,7 +18,7 @@ const Basket = () => {
     return state.basket;
   });
 
-  const totalCount = items.reduce((sum, item) => {
+  const totalCount = items.reduce((sum: number, item: any) => {
     return sum + item.count;
   }, 0);
 

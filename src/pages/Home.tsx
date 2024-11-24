@@ -1,5 +1,5 @@
 //libraries react
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
@@ -17,7 +17,7 @@ import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "./Pagination/Pagination";
 
-const Home = () => {
+const Home: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -30,11 +30,11 @@ const Home = () => {
     (state) => state.pizza
   );
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
