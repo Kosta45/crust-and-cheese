@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setSort } from "../redux/slices/filterSlice";
@@ -17,7 +17,7 @@ export const list: ListItem[] = [
   { name: "алфавиту (ASC)", sortProperty: "-title" },
 ];
 
-const Sort = () => {
+const Sort: FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ const Sort = () => {
   //states
   const [visibleSort, setVisibleSort] = useState(false);
 
-  const selectActiveSort = (index) => {
+  const selectActiveSort = (index: number) => {
     if (index) {
       setVisibleSort(false);
     }
@@ -44,8 +44,8 @@ const Sort = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setVisibleSort(false);
       }
     };

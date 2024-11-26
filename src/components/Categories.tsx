@@ -2,21 +2,20 @@ import { useRef, FC } from "react";
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
+  onChangeCategory: (index: number) => void;
 };
+const categories: string[] = [
+  "Все",
+  "Мясные",
+  "Вегетарианская",
+  "Гриль",
+  "Острые",
+  "Закрытые",
+];
 
-const Categories: FC<CategoriesProps> = ({ value, onClickCategory }) => {
+const Categories: FC<CategoriesProps> = ({ value, onChangeCategory }) => {
   //refs
   const categoriesRef = useRef<HTMLUListElement>(null);
-
-  const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
-  ];
 
   return (
     <div className="categories">
@@ -24,7 +23,7 @@ const Categories: FC<CategoriesProps> = ({ value, onClickCategory }) => {
         {categories.map((categoryName, index) => {
           return (
             <li
-              onClick={() => onClickCategory(index)}
+              onClick={() => onChangeCategory(index)}
               className={value === index ? "active" : ""}
               key={index}
             >
