@@ -105,10 +105,10 @@ const Home: FC = () => {
   ));
 
   // Блок с заглушками, скелетоном для пицц.
-  const skelletons = [...new Array(6)].map((itemObj, index) => (
+  const skelletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ));
-
+  console.log(skelletons);
   return (
     <div className="container">
       <div className="content__top">
