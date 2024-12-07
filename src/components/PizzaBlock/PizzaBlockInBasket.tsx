@@ -62,7 +62,7 @@ const PizzaInBasket: FC<PizzaInBasketProps> = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
           className="button button--outline button--circle cart__item-count-minus"
           onClick={onMinusItem}
         >
@@ -82,7 +82,7 @@ const PizzaInBasket: FC<PizzaInBasketProps> = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
         <div
           className="button button--outline button--circle cart__item-count-plus"

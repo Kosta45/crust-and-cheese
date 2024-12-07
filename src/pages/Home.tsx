@@ -2,7 +2,7 @@
 import { useEffect, useRef, FC } from "react";
 import qs from "qs";
 import { useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   FilterSliceState,
@@ -101,9 +101,7 @@ const Home: FC = () => {
 
   // Блок с пиццами.
   const pizzas = dataPizzas.map((itemObj) => (
-    <Link key={itemObj.id} to={`/pizza/${itemObj.id}`}>
-      <PizzaBlock key={itemObj.id} {...itemObj} />
-    </Link>
+    <PizzaBlock key={itemObj.id} {...itemObj} />
   ));
 
   // Блок с заглушками, скелетоном для пицц.
