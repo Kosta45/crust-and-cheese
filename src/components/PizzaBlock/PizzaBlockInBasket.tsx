@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 
 import {
   addItem,
+  BasketItem,
   minusItem,
   removeItem,
-  // clearItems,
 } from "../../redux/slices/basketSlice";
 
 type PizzaInBasketProps = {
@@ -40,7 +40,7 @@ const PizzaInBasket: FC<PizzaInBasketProps> = ({
     dispatch(
       addItem({
         id,
-      })
+      } as BasketItem)
     );
   };
 

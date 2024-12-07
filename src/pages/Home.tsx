@@ -1,34 +1,34 @@
 //libraries react
 import { useEffect, useRef, FC } from "react";
 import qs from "qs";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 import {
+  FilterSliceState,
   setCategoryId,
   setCurrentPage,
   setFilters,
 } from "../redux/slices/filterSlice";
-import { fetchPizzasData } from "../redux/slices/pizzasSlice";
+import { fetchPizzasData, PizzaSliceState } from "../redux/slices/pizzasSlice";
+import { RootState, useAppDispatch } from "../redux/store";
 
 import Categories from "../components/Categories";
 import Sort, { list } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from "./Pagination/Pagination";
+import Pagination from "../components/Pagination/Pagination";
 
 const Home: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { categoryId, sort, currentPage, searchValue } = useSelector(
-    (state) => state.filter
-  );
-  const { items: dataPizzas, status: statusLoading } = useSelector(
-    (state) => state.pizza
-  );
+  const { categoryId, sort, currentPage, searchValue }: FilterSliceState =
+    useSelector((state: RootState) => state.filter);
+  const { items: dataPizzas, status: statusLoading }: PizzaSliceState =
+    useSelector((state: RootState) => state.pizza);
 
   const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
@@ -50,7 +50,7 @@ const Home: FC = () => {
         sortBy,
         order,
         search,
-        currentPage,
+        currentPage: String(currentPage),
       })
     );
     window.scrollTo(0, 0);
@@ -74,16 +74,22 @@ const Home: FC = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
+      const sort = list.find((obj) => obj.sortProperty === params.sortBy);
 
-      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
-
+      if (sort) {
+        params.sortBy = sort;
+      }
       dispatch(
         setFilters({
-          ...params,
-          sort,
+          searchValue: String(params.search),
+          categoryId: Number(params.category),
+          currentPage: Number(params.currentPage),
+          sort: sort || list[0],
         })
       );
-      isSearch.currentPage = true;
+      console.log(params);
+      // isMounted.current = true;
+      isSearch.current = true;
     }
   }, []);
 
@@ -111,7 +117,7 @@ const Home: FC = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">All пиццы</h2>
 
       {statusLoading === "error" ? (
         <h2>Error</h2>

@@ -6,15 +6,16 @@ import { clearItems } from "../redux/slices/basketSlice";
 
 import PizzaBlockInBasket from "../components/PizzaBlock/PizzaBlockInBasket";
 import BasketEmpty from "../components/BasketEmpty";
+import { RootState } from "../redux/store";
 
 const Basket: FC = () => {
   const dispatch = useDispatch();
 
-  const pizzas = useSelector((state) => {
+  const pizzas = useSelector((state: RootState) => {
     return state.basket.items;
   });
 
-  const { totalPrice, items } = useSelector((state) => {
+  const { totalPrice, items } = useSelector((state: RootState) => {
     return state.basket;
   });
 
