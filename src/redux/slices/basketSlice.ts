@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-type BasketItem = {
+export type BasketItem = {
   id: string;
   title: string;
   imageUrl: string;
   price: number;
-  type: number;
+  type: string;
   size: number;
   count: number;
 };
@@ -25,7 +25,7 @@ const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<BasketItem>) {
       const findItem = state.items.find((obj) => {
         return obj.id === action.payload.id;
       });
@@ -43,7 +43,7 @@ const basketSlice = createSlice({
         return item.price * item.count + sum;
       }, 0);
     },
-    minusItem(state, action) {
+    minusItem(state, action: PayloadAction<string>) {
       const findItem = state.items.find((obj) => {
         return obj.id === action.payload;
       });
@@ -58,7 +58,7 @@ const basketSlice = createSlice({
         state.totalPrice = 0;
       }
     },
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<string>) {
       const findItem = state.items.find((obj) => {
         return obj.id === action.payload;
       });
