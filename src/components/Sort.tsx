@@ -1,35 +1,36 @@
 import { useEffect, useRef, useState, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setSort } from "../redux/slices/filterSlice";
+import { FilterSortProperty, setSort } from "../redux/slices/filterSlice";
+import { RootState } from "../redux/store";
 
-type ListItem = {
+export type ListItem = {
   name: string;
   sortProperty: string;
 };
 
 export const list: ListItem[] = [
-  { name: "популярности (DESC)", sortProperty: "rating" },
-  { name: "популярности (ASC)", sortProperty: "-rating" },
-  { name: "цене (DESC)", sortProperty: "price" },
-  { name: "цене (ASC)", sortProperty: "-price" },
-  { name: "алфавиту (DESC)", sortProperty: "title" },
-  { name: "алфавиту (ASC)", sortProperty: "-title" },
+  { name: "популярности (DESC)", sortProperty: FilterSortProperty.RATING_DESC },
+  { name: "популярности (ASC)", sortProperty: FilterSortProperty.RATING_ASC },
+  { name: "цене (DESC)", sortProperty: FilterSortProperty.PRICE_DESC },
+  { name: "цене (ASC)", sortProperty: FilterSortProperty.PRICE_ASC },
+  { name: "алфавиту (DESC)", sortProperty: FilterSortProperty.TITLE_DESC },
+  { name: "алфавиту (ASC)", sortProperty: FilterSortProperty.TITLE_ASC },
 ];
 
 const Sort: FC = () => {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector((state: RootState) => state.filter.sort);
   const sortRef = useRef<HTMLDivElement>(null);
 
   //states
   const [visibleSort, setVisibleSort] = useState(false);
 
-  const selectActiveSort = (index: number) => {
-    if (index) {
-      setVisibleSort(false);
-    }
-  };
+  // const selectActiveSort = (index: number) => {
+  //   if (index) {
+  //     setVisibleSort(false);
+  //   }
+  // };
 
   const changeVisibleSort = () => {
     if (visibleSort) {
