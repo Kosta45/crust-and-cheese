@@ -1,5 +1,5 @@
 //libraries react
-import { useEffect, useRef, FC } from "react";
+import { useEffect, useRef, FC, useCallback } from "react";
 import qs from "qs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -30,9 +30,9 @@ const Home: FC = () => {
   const { items: dataPizzas, status: statusLoading }: PizzaSliceState =
     useSelector((state: RootState) => state.pizza);
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
@@ -108,7 +108,7 @@ const Home: FC = () => {
   const skelletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ));
-  console.log(skelletons);
+
   return (
     <div className="container">
       <div className="content__top">

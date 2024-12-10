@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, FC } from "react";
+import { useEffect, useRef, useState, FC, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FilterSortProperty, setSort } from "../redux/slices/filterSlice";
@@ -18,19 +18,13 @@ export const list: ListItem[] = [
   { name: "алфавиту (ASC)", sortProperty: FilterSortProperty.TITLE_ASC },
 ];
 
-const Sort: FC = () => {
+const Sort: FC = memo(() => {
   const dispatch = useDispatch();
   const sort = useSelector((state: RootState) => state.filter.sort);
   const sortRef = useRef<HTMLDivElement>(null);
 
   //states
   const [visibleSort, setVisibleSort] = useState(false);
-
-  // const selectActiveSort = (index: number) => {
-  //   if (index) {
-  //     setVisibleSort(false);
-  //   }
-  // };
 
   const changeVisibleSort = () => {
     if (visibleSort) {
@@ -100,6 +94,6 @@ const Sort: FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;

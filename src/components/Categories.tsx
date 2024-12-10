@@ -1,4 +1,4 @@
-import { useRef, FC } from "react";
+import { useRef, FC, memo } from "react";
 
 type CategoriesProps = {
   value: number;
@@ -13,7 +13,7 @@ const categories: string[] = [
   "Закрытые",
 ];
 
-const Categories: FC<CategoriesProps> = ({ value, onChangeCategory }) => {
+const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
   //refs
   const categoriesRef = useRef<HTMLUListElement>(null);
 
@@ -34,6 +34,6 @@ const Categories: FC<CategoriesProps> = ({ value, onChangeCategory }) => {
       </ul>
     </div>
   );
-};
+});
 
 export default Categories;
