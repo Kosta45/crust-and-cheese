@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { clearItems } from "../redux/slices/basketSlice";
+import { clearItems } from "../redux/slices/basket/slice";
 
 import PizzaBlockInBasket from "../components/PizzaBlock/PizzaBlockInBasket";
 import BasketEmpty from "../components/BasketEmpty";

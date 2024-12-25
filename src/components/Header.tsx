@@ -3,14 +3,24 @@ import { useSelector } from "react-redux";
 
 import Search from "./Search/Search.jsx";
 import { RootState } from "../redux/store.js";
+import { useEffect, useRef } from "react";
 
 const Header = () => {
   const { items, totalPrice } = useSelector((state: RootState) => state.basket);
   const location = useLocation();
+  const isMounted = useRef(false);
 
   const totalCount = items.reduce((sum: number, item) => {
     return sum + item.count;
   }, 0);
+
+  useEffect(() => {
+    if (isMounted) {
+      const json = JSON.stringify(items);
+      localStorage.setItem("basket", json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">
@@ -24,7 +34,7 @@ const Header = () => {
             </div>
           </div>
         </Link>
-        {location.pathname !== "/basket" && <Search />}
+        {location.pathname !== "/basket " && <Search />}
         {location.pathname !== "/basket" && (
           <div className="header__cart">
             <Link to="/basket" className="button button--cart">

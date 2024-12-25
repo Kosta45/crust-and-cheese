@@ -1,12 +1,10 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  addItem,
-  BasketItem,
-  selectBasketItemById,
-} from "../../redux/slices/basketSlice";
 import { Link } from "react-router-dom";
+import { selectBasketItemById } from "../../redux/slices/basket/selectors";
+import { BasketItem } from "../../redux/slices/basket/types";
+import { addItem } from "../../redux/slices/basket/slice";
 
 type PizzaBlockProps = {
   id: string;

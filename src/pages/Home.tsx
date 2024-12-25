@@ -5,12 +5,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
-  FilterSliceState,
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../redux/slices/filterSlice";
-import { fetchPizzasData, PizzaSliceState } from "../redux/slices/pizzasSlice";
+} from "../redux/slices/filter/slice";
+import { fetchPizzasData } from "../redux/slices/pizza/slice";
 import { RootState, useAppDispatch } from "../redux/store";
 
 import Categories from "../components/Categories";
@@ -18,6 +17,8 @@ import Sort, { list } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination/Pagination";
+import { FilterSliceState } from "../redux/slices/filter/types";
+import { PizzaSliceState } from "../redux/slices/pizza/types";
 
 const Home: FC = () => {
   const navigate = useNavigate();

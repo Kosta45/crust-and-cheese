@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 
 import {
   addItem,
-  BasketItem,
   minusItem,
   removeItem,
-} from "../../redux/slices/basketSlice";
+} from "../../redux/slices/basket/slice";
+import { BasketItem } from "../../redux/slices/basket/types";
 
 type PizzaInBasketProps = {
   id: string;
