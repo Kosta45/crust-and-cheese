@@ -7,6 +7,15 @@ body {
   background-color: $background;
 }
 
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
@@ -64,6 +73,7 @@ body {
   &--cart {
     max-width: 820px;
     margin: 90px auto;
+
 
     .content__title {
       margin: 0;
