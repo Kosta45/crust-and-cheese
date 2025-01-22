@@ -116,7 +116,7 @@ const Home: FC = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort />
       </div>
-      <h2 className="content__title">All пиццы</h2>
+      <h2 className="content__title">All pizzas</h2>
 
       {statusLoading === "error" ? (
         <h2>Error</h2>

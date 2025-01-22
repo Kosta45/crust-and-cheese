@@ -32,7 +32,7 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
   const [activeType, setActiveType] = useState<number>(0);
   const [activeSize, setActiveSize] = useState<number>(0);
 
-  const typeNames: string[] = ["Тонкое", "Традиционное"];
+  const typeNames: string[] = ["Thin", "Traditional"];
 
   const onClickAdd = () => {
     const item: BasketItem = {
@@ -76,7 +76,7 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
                   key={index}
                   className={activeSize === index ? "active" : ""}
                 >
-                  {size} см.
+                  {size} cm.
                 </li>
               );
             })}
@@ -100,7 +100,7 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
                 fill="white"
               />
             </svg>
-            <span>Добавить</span>
+            <span>Add</span>
             {isCount > 0 && <i>{isCount}</i>}
           </button>
         </div>

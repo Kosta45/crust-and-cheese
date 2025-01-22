@@ -66,7 +66,7 @@ const Basket: FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Корзина
+            Basket
           </h2>
           <div className="cart__clear" onClick={onClickClear}>
             <svg
@@ -105,7 +105,7 @@ const Basket: FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Очистить корзину</span>
+            <span>Clear Basket</span>
           </div>
         </div>
         <div className="content__items">
@@ -118,11 +118,11 @@ const Basket: FC = () => {
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Всего пицц: <b>{totalCount} шт.</b>{" "}
+              Total pizzas: <b>{totalCount}</b>{" "}
             </span>
             <span>
               {" "}
-              Сумма заказа: <b>{totalPrice} ₽</b>{" "}
+              Order total: <b>{totalPrice} $</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
@@ -146,10 +146,10 @@ const Basket: FC = () => {
                 />
               </svg>
 
-              <span>Вернуться назад</span>
+              <span>Go back</span>
             </Link>
             <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+              <span>Pay now</span>
             </div>
           </div>
         </div>

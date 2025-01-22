@@ -11,12 +11,12 @@ export type ListItem = {
 };
 
 export const list: ListItem[] = [
-  { name: "популярности (DESC)", sortProperty: FilterSortProperty.RATING_DESC },
-  { name: "популярности (ASC)", sortProperty: FilterSortProperty.RATING_ASC },
-  { name: "цене (DESC)", sortProperty: FilterSortProperty.PRICE_DESC },
-  { name: "цене (ASC)", sortProperty: FilterSortProperty.PRICE_ASC },
-  { name: "алфавиту (DESC)", sortProperty: FilterSortProperty.TITLE_DESC },
-  { name: "алфавиту (ASC)", sortProperty: FilterSortProperty.TITLE_ASC },
+  { name: "popularity (DESC)", sortProperty: FilterSortProperty.RATING_DESC },
+  { name: "popularity (ASC)", sortProperty: FilterSortProperty.RATING_ASC },
+  { name: "price (DESC)", sortProperty: FilterSortProperty.PRICE_DESC },
+  { name: "price (ASC)", sortProperty: FilterSortProperty.PRICE_ASC },
+  { name: "alphabet (DESC)", sortProperty: FilterSortProperty.TITLE_DESC },
+  { name: "alphabet (ASC)", sortProperty: FilterSortProperty.TITLE_ASC },
 ];
 
 const Sort: FC = memo(() => {
@@ -68,8 +68,8 @@ const Sort: FC = memo(() => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
-        <span>по {sort.name}</span>
+        <b>Sort by:</b>
+        <span>by {sort.name}</span>
       </div>
       {visibleSort && (
         <div className="sort__popup">

@@ -20,7 +20,7 @@ const Pizza: FC = () => {
         );
         setPizza(data);
       } catch (error) {
-        console.log(error + "Ошбика при получения конкретной пиццы");
+        console.log(error + "Error getting specific pizza");
         navigate("/");
       }
     };

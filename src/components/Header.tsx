@@ -30,7 +30,7 @@ const Header = () => {
             <img width="38" src="/src/assets/pizza-logo.svg" alt="Pizza logo" />
             <div>
               <h1>CRUST AND CHEASE</h1>
-              <p>самая вкусная пицца во вселенной</p>
+              <p>The most delicious pizza in the universe</p>
             </div>
           </div>
         </Link>
@@ -38,7 +38,7 @@ const Header = () => {
         {location.pathname !== "/basket" && (
           <div className="header__cart">
             <Link to="/basket" className="button button--cart">
-              <span>{totalPrice} Г</span>
+              <span>{totalPrice} $</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"

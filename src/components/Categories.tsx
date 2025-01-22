@@ -6,12 +6,12 @@ type CategoriesProps = {
 };
 
 const categories: string[] = [
-  "Все",
-  "Мясные",
-  "Вегетарианская",
-  "Гриль",
-  "Острые",
-  "Закрытые",
+  "All",
+  "Meat",
+  "Vegetarian",
+  "Grill",
+  "Spicy",
+  "Closed",
 ];
 
 const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
