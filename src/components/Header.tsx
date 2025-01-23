@@ -27,7 +27,7 @@ const Header = () => {
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="38" src="/src/assets/pizza-logo.svg" alt="Pizza logo" />
+            <img width="38" src="/src/assets/pizza.svg" alt="Pizza logo" />
             <div>
               <h1>CRUST AND CHEASE</h1>
               <p>The most delicious pizza in the universe</p>
