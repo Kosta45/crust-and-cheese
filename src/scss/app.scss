@@ -23,6 +23,10 @@ body::-webkit-scrollbar-thumb {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+
+  @media (max-width: 440px) {
+    width: 95%;
+  }
 }
 
 .content {
@@ -157,6 +161,14 @@ body::-webkit-scrollbar-thumb {
       margin-right: 15px;
       width: 10%;
 
+      @media (max-width: 645px) {
+        width: 18%;
+      }
+
+      @media (max-width: 440px) {
+        width: 22%;
+      }
+
       img {
         width: 80px;
         height: 80px;
@@ -166,19 +178,45 @@ body::-webkit-scrollbar-thumb {
     &-info {
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       width: 40%;
 
       h3 {
         font-weight: bold;
-        font-size: 22px;
+        font-size: 1.3rem;
         line-height: 27px;
         letter-spacing: 0.01em;
       }
 
       p {
-        font-size: 18px;
+        font-size: 1.1rem;
         color: #8d8d8d;
+      }
+
+      @media (max-width: 645px) {
+
+        h3 {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 440px) {
+        & {
+          width: 50%;
+        }
+
+        h3 {
+          font-size: 0.9rem;
+        }
+
+        p {
+          font-size: 0.7rem;
+        }
       }
     }
 
@@ -187,6 +225,7 @@ body::-webkit-scrollbar-thumb {
       align-items: center;
       justify-content: space-between;
       width: 13%;
+
 
       &-minus {
         svg {
@@ -198,6 +237,14 @@ body::-webkit-scrollbar-thumb {
 
       b {
         font-size: 22px;
+
+        @media (max-width: 645px) {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 645px) {
+        width: 22%;
       }
     }
 
@@ -207,10 +254,19 @@ body::-webkit-scrollbar-thumb {
       justify-content: center;
       width: 33%;
 
+      @media (max-width: 645px) {
+        width: 10%;
+      }
+
       b {
         font-weight: bold;
         font-size: 22px;
         letter-spacing: 0.01em;
+
+        @media (max-width: 645px) {
+          font-size: 15px;
+          letter-spacing: 0;
+        }
       }
     }
 
@@ -219,6 +275,10 @@ body::-webkit-scrollbar-thumb {
       align-items: center;
       justify-content: flex-end;
       width: 4%;
+
+      @media (max-width:440px) {
+        width: 8%;
+      }
 
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
@@ -350,7 +410,7 @@ body::-webkit-scrollbar-thumb {
       font-size: 1.1em;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 768px) {
       width: 80%;
 
       h2 {
@@ -368,8 +428,6 @@ body::-webkit-scrollbar-thumb {
       .button--black {
         width: 50%;
       }
-
-      ;
     }
   }
 }

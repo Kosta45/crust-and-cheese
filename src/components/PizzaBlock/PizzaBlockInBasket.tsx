@@ -107,9 +107,9 @@ const PizzaInBasket: FC<PizzaInBasketProps> = ({
         </button>
       </div>
       <div className="cart__item-price">
-        <b>{price} ₽</b>
+        <b>{price} $</b>
       </div>
-      <button className="cart__item-remove">
+      <div className="cart__item-remove">
         <div
           onClick={onClickRemove}
           className="button button--outline button--circle"
@@ -131,7 +131,7 @@ const PizzaInBasket: FC<PizzaInBasketProps> = ({
             />
           </svg>
         </div>
-      </button>
+      </div>
     </div>
   );
 };
