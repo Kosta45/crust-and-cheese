@@ -102,7 +102,7 @@ const Home: FC = () => {
 
   // Блок с пиццами.
   const pizzas = dataPizzas.map((itemObj) => (
-    <PizzaBlock key={itemObj.id} {...itemObj} />
+    <PizzaBlock description={""} rating={""} key={itemObj.id} {...itemObj} />
   ));
 
   // Блок с заглушками, скелетоном для пицц.
