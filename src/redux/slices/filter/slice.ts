@@ -8,6 +8,7 @@ const initialState: FilterSliceState = {
   sort: {
     name: "popularity",
     sortProperty: FilterSortProperty.RATING_DESC,
+    icon: undefined,
   },
 };
 
