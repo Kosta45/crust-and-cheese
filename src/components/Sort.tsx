@@ -5,18 +5,46 @@ import { RootState } from "../redux/store";
 import { setSort } from "../redux/slices/filter/slice";
 import { FilterSortProperty } from "../redux/slices/filter/types";
 
+import iconUp from "../assets/arrow_upward.png";
+import iconDown from "../assets/arrow_downward.png";
+
 export type ListItem = {
   name: string;
+  icon: string;
   sortProperty: string;
 };
 
 export const list: ListItem[] = [
-  { name: "popularity (DESC)", sortProperty: FilterSortProperty.RATING_DESC },
-  { name: "popularity (ASC)", sortProperty: FilterSortProperty.RATING_ASC },
-  { name: "price (DESC)", sortProperty: FilterSortProperty.PRICE_DESC },
-  { name: "price (ASC)", sortProperty: FilterSortProperty.PRICE_ASC },
-  { name: "alphabet (DESC)", sortProperty: FilterSortProperty.TITLE_DESC },
-  { name: "alphabet (ASC)", sortProperty: FilterSortProperty.TITLE_ASC },
+  {
+    name: "popularity",
+    icon: iconDown,
+    sortProperty: FilterSortProperty.RATING_DESC,
+  },
+  {
+    name: "popularity",
+    icon: iconUp,
+    sortProperty: FilterSortProperty.RATING_ASC,
+  },
+  {
+    name: "price",
+    icon: iconDown,
+    sortProperty: FilterSortProperty.PRICE_DESC,
+  },
+  {
+    name: "price",
+    icon: iconUp,
+    sortProperty: FilterSortProperty.PRICE_ASC,
+  },
+  {
+    name: "alphabet",
+    icon: iconDown,
+    sortProperty: FilterSortProperty.TITLE_DESC,
+  },
+  {
+    name: "alphabet",
+    icon: iconDown,
+    sortProperty: FilterSortProperty.TITLE_ASC,
+  },
 ];
 
 const Sort: FC = memo(() => {
@@ -69,7 +97,9 @@ const Sort: FC = memo(() => {
           />
         </svg>
         <b>Sort by:</b>
-        <span>by {sort.name}</span>
+
+        <span>by {sort.name + " "} </span>
+        <img className="sort__label-by sort-by" src={sort.icon} alt="" />
       </div>
       {visibleSort && (
         <div className="sort__popup">
@@ -87,6 +117,13 @@ const Sort: FC = memo(() => {
                   key={obj.name}
                 >
                   {obj.name}
+                  {obj.icon && (
+                    <img
+                      className="sort-by"
+                      src={obj.icon}
+                      alt={sort.sortProperty}
+                    />
+                  )}
                 </li>
               );
             })}

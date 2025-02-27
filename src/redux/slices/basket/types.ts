@@ -1,6 +1,8 @@
 export type BasketItem = {
   id: string;
   title: string;
+  description: string;
+  rating: string;
   imageUrl: string;
   price: number;
   type: string;

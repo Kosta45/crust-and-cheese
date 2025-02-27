@@ -28,6 +28,7 @@
       text-decoration: underline $orange;
       cursor: pointer;
     }
+
   }
 
   &__popup {
@@ -45,6 +46,9 @@
       overflow: hidden;
 
       li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         padding: 12px 20px;
         cursor: pointer;
 
@@ -60,4 +64,9 @@
       }
     }
   }
+}
+
+.sort-by {
+  width: 30px;
+  height: 30px;
 }

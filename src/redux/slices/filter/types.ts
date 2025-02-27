@@ -8,6 +8,7 @@ export enum FilterSortProperty {
 }
 
 export type FilterSort = {
+  icon: string | undefined;
   name: string;
   sortProperty: string;
 };

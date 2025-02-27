@@ -20,12 +20,14 @@ const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
   const scrollableRef = useRef<HTMLDivElement>(null);
 
   const disablePageScroll = () => {
-    document.body.style.transition = "overflow 0.3s easy";
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.body.style.overflow = "hidden";
   };
   const enablePageScroll = () => {
-    document.body.style.transition = "overflow 0.3s easy";
     document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
   };
   const handleMouseScrollX = (event: React.WheelEvent<HTMLDivElement>) => {
     const scrollContainer = scrollableRef.current;

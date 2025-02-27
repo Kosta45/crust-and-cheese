@@ -9,6 +9,8 @@ import { addItem } from "../../redux/slices/basket/slice";
 type PizzaBlockProps = {
   id: string;
   title: string;
+  description: string;
+  rating: string;
   price: number;
   imageUrl: string;
   sizes: number[];
@@ -19,6 +21,8 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
   id,
   title,
   price,
+  description,
+  rating,
   imageUrl,
   sizes,
   types,
@@ -38,6 +42,8 @@ const PizzaBlock: FC<PizzaBlockProps> = ({
     const item: BasketItem = {
       id,
       title,
+      description,
+      rating,
       imageUrl,
       price,
       type: typeNames[activeType],
