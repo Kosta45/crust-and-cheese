@@ -11,38 +11,45 @@ import iconDown from "../assets/arrow_downward.png";
 export type ListItem = {
   name: string;
   icon: string;
+  nameUniq: string;
   sortProperty: string;
 };
 
 export const list: ListItem[] = [
   {
     name: "popularity",
+    nameUniq: "popularityDown",
     icon: iconDown,
     sortProperty: FilterSortProperty.RATING_DESC,
   },
   {
     name: "popularity",
+    nameUniq: "popularityUp",
     icon: iconUp,
     sortProperty: FilterSortProperty.RATING_ASC,
   },
   {
     name: "price",
+    nameUniq: "priceDown",
     icon: iconDown,
     sortProperty: FilterSortProperty.PRICE_DESC,
   },
   {
     name: "price",
+    nameUniq: "priceUp",
     icon: iconUp,
     sortProperty: FilterSortProperty.PRICE_ASC,
   },
   {
     name: "alphabet",
+    nameUniq: "alphabetDown",
     icon: iconDown,
     sortProperty: FilterSortProperty.TITLE_DESC,
   },
   {
     name: "alphabet",
-    icon: iconDown,
+    nameUniq: "alphabetUp",
+    icon: iconUp,
     sortProperty: FilterSortProperty.TITLE_ASC,
   },
 ];
@@ -114,7 +121,7 @@ const Sort: FC = memo(() => {
                   className={
                     sort.sortProperty === obj.sortProperty ? "active" : ""
                   }
-                  key={obj.name}
+                  key={obj.nameUniq}
                 >
                   {obj.name}
                   {obj.icon && (
