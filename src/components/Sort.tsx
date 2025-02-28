@@ -106,7 +106,15 @@ const Sort: FC = memo(() => {
         <b>Sort by:</b>
 
         <span>by {sort.name + " "} </span>
-        <img className="sort__label-by sort-by" src={sort.icon} alt="" />
+        <img
+          className="sort__label-by sort-by"
+          src={
+            sort.icon
+              ? sort.icon
+              : "https://github.com/Kosta45/crust-and-cheese/blob/main/src/assets/arrow_downward.png?raw=true"
+          }
+          alt=""
+        />
       </div>
       {visibleSort && (
         <div className="sort__popup">
