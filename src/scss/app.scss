@@ -450,6 +450,7 @@ body::-webkit-scrollbar-thumb {
 .pizza-container {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -469,6 +470,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: space-between;
     height: 90%;
+    width: 50%;
   }
 
   &__info {
@@ -481,5 +483,6 @@ body::-webkit-scrollbar-thumb {
 
   &__button {
     width: 45%;
+    margin: 5px;
   }
 }
