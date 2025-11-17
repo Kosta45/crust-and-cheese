@@ -1,4 +1,4 @@
-// https://docs.netlify.com/routing/redirects/
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
